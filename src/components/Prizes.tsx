@@ -15,7 +15,6 @@ const Prizes: React.FC = () => {
       mode: "Online",
       prize: "₹15,000",
       icon: Code,
-      gradient: "from-cyan-500 via-blue-500 to-purple-500",
       bgPattern: "coding",
       difficulty: "Advanced",
       duration: "6 hours"
@@ -28,7 +27,6 @@ const Prizes: React.FC = () => {
       mode: "Hybrid",
       prize: "₹20,000",
       icon: Palette,
-      gradient: "from-green-400 via-teal-500 to-blue-500",
       bgPattern: "design",
       difficulty: "Intermediate",
       duration: "48 hours"
@@ -41,7 +39,6 @@ const Prizes: React.FC = () => {
       mode: "Offline",
       prize: "₹25,000",
       icon: TrendingUp,
-      gradient: "from-yellow-400 via-green-500 to-teal-500",
       bgPattern: "business",
       difficulty: "Expert",
       duration: "3 days"
@@ -54,7 +51,6 @@ const Prizes: React.FC = () => {
       mode: "Online",
       prize: "₹12,000",
       icon: Video,
-      gradient: "from-blue-400 via-purple-500 to-indigo-500",
       bgPattern: "ai",
       difficulty: "Advanced",
       duration: "4 hours"
@@ -67,7 +63,6 @@ const Prizes: React.FC = () => {
       mode: "Online",
       prize: "₹18,000",
       icon: Bot,
-      gradient: "from-teal-400 via-cyan-500 to-blue-500",
       bgPattern: "bot",
       difficulty: "Advanced",
       duration: "8 hours"
@@ -80,7 +75,6 @@ const Prizes: React.FC = () => {
       mode: "Offline",
       prize: "₹8,000",
       icon: MessageSquare,
-      gradient: "from-green-400 via-yellow-500 to-green-600",
       bgPattern: "debate",
       difficulty: "Intermediate",
       duration: "2 hours"
@@ -93,7 +87,6 @@ const Prizes: React.FC = () => {
       mode: "Offline",
       prize: "₹5,000",
       icon: Terminal,
-      gradient: "from-blue-400 via-teal-500 to-green-500",
       bgPattern: "linux",
       difficulty: "Beginner",
       duration: "6 hours"
@@ -106,10 +99,10 @@ const Prizes: React.FC = () => {
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case 'Beginner': return 'bg-green-500/20 text-green-300 border-green-500/30';
-      case 'Intermediate': return 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30';
-      case 'Advanced': return 'bg-blue-500/20 text-blue-300 border-blue-500/30';
-      case 'Expert': return 'bg-purple-500/20 text-purple-300 border-purple-500/30';
+      case 'Beginner': return 'bg-[#40ffaa]/20 text-[#40ffaa] border-[#40ffaa]/30';
+      case 'Intermediate': return 'bg-[#4079ff]/20 text-[#4079ff] border-[#4079ff]/30';
+      case 'Advanced': return 'bg-[#4079ff]/30 text-[#4079ff] border-[#4079ff]/40';
+      case 'Expert': return 'bg-[#40ffaa]/30 text-[#40ffaa] border-[#40ffaa]/40';
       default: return 'bg-gray-500/20 text-gray-300 border-gray-500/30';
     }
   };
@@ -128,7 +121,7 @@ const Prizes: React.FC = () => {
         <div className="text-center mb-16">
           <h2 className="text-5xl md:text-7xl font-black mb-6 tracking-tight">
             <GradientText
-              colors={["#0b63f6", "#13e2da", "#0b63f6"]}
+              colors={["#4079ff", "#40ffaa", "#4079ff"]}
               animationSpeed={4}
               showBorder={false}
               className="font-avartar"
@@ -137,7 +130,7 @@ const Prizes: React.FC = () => {
               Epic Events
             </GradientText>
           </h2>
-          <div className="w-32 h-1 bg-gradient-to-r from-[#0b63f6] to-[#13e2da] mx-auto mb-6 rounded-full"></div>
+          <div className="w-32 h-1 bg-gradient-to-r from-[#4079ff] to-[#40ffaa] mx-auto mb-6 rounded-full"></div>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             Where innovation meets competition. Choose your battlefield.
           </p>
@@ -174,16 +167,16 @@ const Prizes: React.FC = () => {
                 </AnimatePresence>
 
                 <div className={cn(
-                  "rounded-3xl h-full w-full overflow-hidden bg-black/20 backdrop-blur-xl border border-[#0b63f6]/20 group-hover:border-[#0b63f6]/40 relative z-20 transition-all duration-700 transform hover:scale-105",
-                  hoveredCard === event.id ? 'shadow-2xl shadow-[#0b63f6]/20' : 'shadow-xl'
+                  "rounded-3xl h-full w-full overflow-hidden bg-card/80 backdrop-blur-sm border border-[#4079ff]/20 group-hover:border-[#4079ff]/40 relative z-20 transition-all duration-300 transform hover:scale-105",
+                  hoveredCard === event.id ? 'shadow-2xl shadow-[#4079ff]/20' : 'shadow-xl'
                 )}>
                   <div className="relative z-50">
                     {/* Gradient Overlay */}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${event.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#4079ff]/10 to-[#40ffaa]/10 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
                     
                     {/* Floating Icon */}
                     <div className="relative p-6">
-                      <div className={`inline-flex p-4 rounded-2xl bg-gradient-to-r ${event.gradient} mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                      <div className="inline-flex p-4 rounded-2xl bg-gradient-to-r from-[#4079ff] to-[#40ffaa] mb-4 group-hover:scale-110 transition-transform duration-300">
                         <Icon className="w-8 h-8 text-white" />
                       </div>
                       
@@ -205,11 +198,11 @@ const Prizes: React.FC = () => {
 
                       {/* Stats Grid */}
                       <div className="grid grid-cols-2 gap-4 mb-6">
-                        <div className="bg-gray-800/50 rounded-xl p-3 backdrop-blur-sm border border-[#0b63f6]/20">
+                        <div className="bg-gray-800/50 rounded-xl p-3 backdrop-blur-sm border border-[#4079ff]/20">
                           <div className="text-gray-400 text-xs mb-1">Team Size</div>
                           <div className="text-white font-bold text-sm">{event.teamSize}</div>
                         </div>
-                        <div className="bg-gray-800/50 rounded-xl p-3 backdrop-blur-sm border border-[#0b63f6]/20">
+                        <div className="bg-gray-800/50 rounded-xl p-3 backdrop-blur-sm border border-[#4079ff]/20">
                           <div className="text-gray-400 text-xs mb-1">Duration</div>
                           <div className="text-white font-bold text-sm">{event.duration}</div>
                         </div>
@@ -218,15 +211,15 @@ const Prizes: React.FC = () => {
                       {/* Mode & Prize */}
                       <div className="flex justify-between items-center mb-6">
                         <span className={`px-4 py-2 rounded-full text-sm font-bold ${
-                          event.mode === 'Online' ? 'bg-green-500/20 text-green-300 border border-green-500/30' :
-                          event.mode === 'Offline' ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30' :
-                          'bg-purple-500/20 text-purple-300 border border-purple-500/30'
+                          event.mode === 'Online' ? 'bg-[#40ffaa]/20 text-[#40ffaa] border border-[#40ffaa]/30' :
+                          event.mode === 'Offline' ? 'bg-[#4079ff]/20 text-[#4079ff] border border-[#4079ff]/30' :
+                          'bg-[#4079ff]/30 text-[#4079ff] border border-[#4079ff]/40'
                         }`}>
                           {event.mode}
                         </span>
                         <div className="text-right">
                           <div className="text-gray-400 text-xs">Prize Pool</div>
-                          <div className={`text-xl font-black bg-gradient-to-r ${event.gradient} bg-clip-text text-transparent`}>
+                          <div className="text-xl font-black bg-gradient-to-r from-[#4079ff] to-[#40ffaa] bg-clip-text text-transparent">
                             {event.prize}
                           </div>
                         </div>
@@ -235,7 +228,7 @@ const Prizes: React.FC = () => {
                       {/* Epic Button */}
                       <button
                         onClick={() => handleReadMore(event.id)}
-                        className={`w-full relative overflow-hidden bg-gradient-to-r ${event.gradient} text-white font-bold py-4 px-6 rounded-2xl transition-all duration-300 group-hover:shadow-2xl transform group-hover:translate-y-[-2px] hover:scale-[1.02]`}
+                        className="w-full relative overflow-hidden bg-gradient-to-r from-[#4079ff] to-[#40ffaa] text-white font-bold py-4 px-6 rounded-2xl transition-all duration-300 group-hover:shadow-2xl transform group-hover:translate-y-[-2px] hover:scale-[1.02]"
                       >
                         <span className="relative z-10">ENTER THE ARENA</span>
                         <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
@@ -243,7 +236,7 @@ const Prizes: React.FC = () => {
                     </div>
 
                     {/* Hover Glow Effect */}
-                    <div className={`absolute -inset-1 bg-gradient-to-r ${event.gradient} opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500 -z-10`}></div>
+                    <div className="absolute -inset-1 bg-gradient-to-r from-[#4079ff] to-[#40ffaa] opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500 -z-10"></div>
                   </div>
                 </div>
               </div>
@@ -254,7 +247,7 @@ const Prizes: React.FC = () => {
         {/* Bottom CTA */}
         <div className="text-center mt-16">
           <p className="text-gray-400 text-lg mb-6">Ready to make your mark?</p>
-          <div className="inline-flex px-8 py-3 bg-gradient-to-r from-[#0b63f6] to-[#13e2da] rounded-full text-white font-bold animate-pulse">
+          <div className="inline-flex px-8 py-3 bg-gradient-to-r from-[#4079ff] to-[#40ffaa] rounded-full text-white font-bold animate-pulse">
             Registration Opens Soon
           </div>
         </div>

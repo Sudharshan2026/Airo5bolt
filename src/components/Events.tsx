@@ -17,6 +17,13 @@ interface CarouselApi {
 }
 
 // Mock Carousel components (in real app, import from shadcn/ui)
+interface CarouselContentProps {
+  children: React.ReactNode;
+  currentSlide?: number;
+  setTotalSlides?: (count: number) => void;
+  className?: string;
+}
+
 const Carousel = ({ children, setApi, className }: { 
   children: React.ReactNode; 
   setApi?: (api: CarouselApi) => void; 
@@ -29,7 +36,7 @@ const Carousel = ({ children, setApi, className }: {
     const api: CarouselApi = {
       scrollSnapList: () => Array.from({ length: totalSlides }, (_, i) => i),
       selectedScrollSnap: () => currentSlide,
-      on: (_event: string, _callback: () => void) => {
+      on: () => {
         // Mock event listener
       },
       scrollTo: (index: number) => setCurrentSlide(index),
@@ -53,8 +60,8 @@ const Carousel = ({ children, setApi, className }: {
   return (
     <div className={`relative ${className}`}>
       {React.Children.map(children, (child) => {
-        if (React.isValidElement(child) && child.type === CarouselContent) {
-          return React.cloneElement(child, { currentSlide, setTotalSlides } as any);
+        if (React.isValidElement<CarouselContentProps>(child) && child.type === CarouselContent) {
+          return React.cloneElement(child, { currentSlide, setTotalSlides });
         }
         return child;
       })}
@@ -62,12 +69,7 @@ const Carousel = ({ children, setApi, className }: {
   );
 };
 
-const CarouselContent = ({ children, currentSlide, setTotalSlides, className }: { 
-  children: React.ReactNode; 
-  currentSlide?: number; 
-  setTotalSlides?: (count: number) => void; 
-  className?: string; 
-}) => {
+const CarouselContent = ({ children, currentSlide, setTotalSlides, className }: CarouselContentProps) => {
   const slides = React.Children.toArray(children);
   
   useEffect(() => {

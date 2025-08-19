@@ -12,7 +12,7 @@ import CollegeMap from "./components/CollegeMap";
 import WhyJoinUs from "./components/WhyJoinUs";
 import Results from "./components/Results";
 import Preloader from "./components/Preloader";
-import Prizes from "./components/Prizes";
+import Prizes from "./components/Events";
 
 function ScrollToHashElement() {
   const location = useLocation();

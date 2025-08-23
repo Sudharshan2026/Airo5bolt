@@ -203,23 +203,23 @@ const Prizes = () => {
 
   const getColorClasses = (color: string) => {
     const colorMap: Record<string, { bg: string; text: string; border: string }> = {
-      blue: { bg: 'bg-blue-500', text: 'text-blue-400', border: 'border-blue-500/30' },
-      teal: { bg: 'bg-teal-500', text: 'text-teal-400', border: 'border-teal-500/30' },
+      blue: { bg: 'bg-primary', text: 'text-primary', border: 'border-primary/30' },
+      teal: { bg: 'bg-secondary', text: 'text-secondary', border: 'border-secondary/30' },
       green: { bg: 'bg-green-500', text: 'text-green-400', border: 'border-green-500/30' },
       purple: { bg: 'bg-purple-500', text: 'text-purple-400', border: 'border-purple-500/30' },
       cyan: { bg: 'bg-cyan-500', text: 'text-cyan-400', border: 'border-cyan-500/30' },
       yellow: { bg: 'bg-yellow-500', text: 'text-yellow-400', border: 'border-yellow-500/30' },
       emerald: { bg: 'bg-emerald-500', text: 'text-emerald-400', border: 'border-emerald-500/30' }
     };
-    return colorMap[color] || colorMap.blue;
+    return colorMap[color] || { bg: 'bg-primary', text: 'text-primary', border: 'border-primary/30' };
   };
 
   return (
-    <section id="prizes" className="py-20 bg-gray-950 text-white relative overflow-hidden">
+    <section id="prizes" className="py-20 bg-background text-foreground relative overflow-hidden">
       {/* Simplified Background */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
@@ -227,15 +227,15 @@ const Prizes = () => {
         <div className="text-center mb-16">
           <h2 className="text-5xl md:text-7xl font-black mb-6 tracking-tight">
             <GradientText
-              colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#4079ff", "#40ffaa"]}
+              colors={["var(--primary)", "var(--secondary)", "var(--primary)"]}
               className="font-avartar"
               style={{ fontFamily: "'AvartarWater', sans-serif" }}
             >
               Epic Events
             </GradientText>
           </h2>
-          <div className="w-32 h-1 bg-blue-500 mx-auto mb-6 rounded-full"></div>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <div className="w-32 h-1 bg-primary mx-auto mb-6 rounded-full"></div>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Where innovation meets competition. Choose your battlefield.
           </p>
         </div>
@@ -275,41 +275,41 @@ const Prizes = () => {
                 
                 return (
                   <CarouselItem key={event.id} className="px-4">
-                    <div className="rounded-3xl h-full w-full overflow-hidden bg-gray-900/50 backdrop-blur-xl border border-gray-700 shadow-xl">
+                    <div className="rounded-3xl h-full w-full overflow-hidden bg-muted/50 backdrop-blur-xl border border-border shadow-xl">
                       {/* Icon Section */}
                       <div className="relative p-6">
                         <div className={`inline-flex p-4 rounded-2xl ${colors.bg} mb-4`}>
-                          <Icon className="w-8 h-8 text-white" />
+                          <Icon className="w-8 h-8 text-foreground" />
                         </div>
         
                       </div>
 
                       {/* Content */}
                       <div className="px-6 pb-6">
-                        <h3 className="text-xl md:text-2xl font-bold mb-3 text-white">
+                        <h3 className="text-xl md:text-2xl font-bold mb-3 text-foreground">
                           {event.name}
                         </h3>
                         
-                        <p className="text-gray-300 text-sm mb-6 leading-relaxed">
+                        <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
                           {event.description}
                         </p>
 
                         {/* Stats Grid */}
                         <div className="grid grid-cols-2 gap-4 mb-6">
-                          <div className="bg-gray-800/50 rounded-xl p-3 backdrop-blur-sm border border-gray-700">
-                            <div className="text-gray-400 text-xs mb-1">Team Size</div>
-                            <div className="text-white font-bold text-sm">{event.teamSize}</div>
+                          <div className="bg-muted/50 rounded-xl p-3 backdrop-blur-sm border border-border">
+                            <div className="text-muted-foreground text-xs mb-1">Team Size</div>
+                            <div className="text-foreground font-bold text-sm">{event.teamSize}</div>
                           </div>
-                          <div className="bg-gray-800/50 rounded-xl p-3 backdrop-blur-sm border border-gray-700">
-                            <div className="text-gray-400 text-xs mb-1">Duration</div>
-                            <div className="text-white font-bold text-sm">{event.duration}</div>
+                          <div className="bg-muted/50 rounded-xl p-3 backdrop-blur-sm border border-border">
+                            <div className="text-muted-foreground text-xs mb-1">Duration</div>
+                            <div className="text-foreground font-bold text-sm">{event.duration}</div>
                           </div>
                         </div>
 
                         {/* Mode & Prize */}
                         <div className="flex justify-end items-center mb-6">
                           <div className="text-right">
-                            <div className="text-gray-400 text-xs">Prize Pool</div>
+                            <div className="text-muted-foreground text-xs">Prize Pool</div>
                             <div className={`text-lg font-black ${colors.text}`}>
                               {event.prize}
                             </div>
@@ -319,7 +319,7 @@ const Prizes = () => {
                         {/* Button */}
                         <button
                           onClick={() => handleReadMore(event.id)}
-                          className={`w-full ${colors.bg} hover:opacity-90 text-white font-bold py-3 px-6 rounded-2xl transition-all duration-300`}
+                          className={`w-full ${colors.bg} hover:opacity-90 text-foreground font-bold py-3 px-6 rounded-2xl transition-all duration-300`}
                         >
                           ENTER THE ARENA
                         </button>
@@ -336,7 +336,7 @@ const Prizes = () => {
             <button
               onClick={() => api?.scrollPrev()}
               disabled={!api?.canScrollPrev()}
-              className="bg-gray-800/80 hover:bg-gray-700/80 disabled:opacity-50 disabled:cursor-not-allowed text-white p-3 rounded-full transition-colors"
+              className="bg-muted/80 hover:bg-muted/60 disabled:opacity-50 disabled:cursor-not-allowed text-foreground p-3 rounded-full transition-colors"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
@@ -344,7 +344,7 @@ const Prizes = () => {
             <button
               onClick={() => api?.scrollNext()}
               disabled={!api?.canScrollNext()}
-              className="bg-gray-800/80 hover:bg-gray-700/80 disabled:opacity-50 disabled:cursor-not-allowed text-white p-3 rounded-full transition-colors"
+              className="bg-muted/80 hover:bg-muted/60 disabled:opacity-50 disabled:cursor-not-allowed text-foreground p-3 rounded-full transition-colors"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
@@ -352,7 +352,7 @@ const Prizes = () => {
 
           {/* Slide Counter */}
           <div className="flex justify-center items-center mt-4 space-x-2">
-            <div className="text-sm text-gray-400">
+            <div className="text-sm text-muted-foreground">
               {current} of {count}
             </div>
             <div className="flex space-x-1">
@@ -361,7 +361,7 @@ const Prizes = () => {
                   key={i}
                   onClick={() => api?.scrollTo(i)}
                   className={`w-2 h-2 rounded-full transition-colors ${
-                    i === current - 1 ? 'bg-blue-500' : 'bg-gray-600'
+                    i === current - 1 ? 'bg-primary' : 'bg-muted'
                   }`}
                 />
               ))}

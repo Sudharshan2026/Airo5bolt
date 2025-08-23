@@ -143,6 +143,7 @@ body {
 :root {
   --radius: 0.625rem;
   --background: rgba(239, 239, 239, 1);
+  --background-transparent: rgba(239, 239, 239, 0.5);
   --foreground: rgba(19, 19, 19, 1);
   --card: rgba(239, 239, 239, 1);
   --card-foreground: rgba(19, 19, 19, 1);
@@ -151,6 +152,7 @@ body {
   --primary: #CE1B1B;
   --primary-foreground: rgba(239, 239, 239, 1);
   --secondary: #F4EFB3;
+  --secondary-rgb: 244, 239, 179;
   --secondary-foreground: rgba(19, 19, 19, 1);
   --muted: #E7E7E7;
   --muted-foreground: #999d9e;
@@ -177,6 +179,7 @@ body {
 
 .dark {
   --background: rgba(19, 19, 19, 1);
+  --background-transparent: rgba(19, 19, 19, 0.5);
   --foreground: rgba(239, 239, 239, 1);
   --card: rgba(19, 19, 19, 1);
   --card-foreground: rgba(239, 239, 239, 1);

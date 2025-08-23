@@ -14,18 +14,18 @@ interface TeamSectionProps {
 
 const TeamSection: React.FC<TeamSectionProps> = ({ title, members }) => (
   <div className="mb-16">
-    <h2 className="text-3xl font-bold text-red-600 text-center mb-8 drop-shadow-neon-red uppercase tracking-wider">
+    <h2 className="text-3xl font-bold text-primary text-center mb-8 drop-shadow-neon-red uppercase tracking-wider">
       {title}
     </h2>
     <div className="flex flex-wrap justify-center gap-8 max-w-6xl mx-auto">
       {members.map((member, index) => (
         <div
           key={index}
-          className="bg-black rounded-lg w-80 sm:w-80 md:w-80 lg:w-96 xl:w-86 border border-red-500 hover:border-red-700 transition-all duration-300 transform hover:-translate-y-3 shadow-red-neon hover:shadow-red-neon-lg hover:scale-105"
+          className="bg-muted rounded-lg w-80 sm:w-80 md:w-80 lg:w-96 xl:w-86 border border-primary hover:border-primary transition-all duration-300 transform hover:-translate-y-3 shadow-primary hover:shadow-primary-lg hover:scale-105"
         >
           <div className="p-6 flex flex-col items-center text-center">
             <div className="group relative w-36 h-36">
-              <div className="absolute inset-0 rounded-full overflow-hidden border-4 border-red-600 shadow-red-neon">
+              <div className="absolute inset-0 rounded-full overflow-hidden border-4 border-primary shadow-primary">
                 <img 
                   src={member.image} 
                   alt={member.name} 
@@ -36,20 +36,20 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, members }) => (
                     href={member.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
+                    className="absolute inset-0 bg-muted/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
                   >
                     <Linkedin 
-                      className="text-red-500 hover:text-red-400 transform hover:scale-125 transition-all duration-200" 
+                      className="text-primary hover:text-primary transform hover:scale-125 transition-all duration-200"
                       size={36}
                     />
                   </a>
                 )}
               </div>
             </div>
-            <h3 className="text-xl font-bold text-red-500 mt-4 mb-1 drop-shadow-neon-red">
+            <h3 className="text-xl font-bold text-primary mt-4 mb-1 drop-shadow-neon-red">
               {member.name}
             </h3>
-            <p className="text-gray-400">{member.position}</p>
+            <p className="text-muted-foreground">{member.position}</p>
           </div>
         </div>
       ))}
@@ -103,13 +103,13 @@ const OrganizersPage: React.FC = () => {
   // ];
 
   return (
-    <div className="min-h-screen py-20 px-4 md:px-8 lg:px-16 bg-black text-white animate-bg-flicker">
+    <div className="min-h-screen py-20 px-4 md:px-8 lg:px-16 bg-background text-foreground animate-bg-flicker">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16 animate-fade-in">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-700 drop-shadow-neon animate-glow-red uppercase tracking-wide animate-text-pulse">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary drop-shadow-neon animate-glow-red uppercase tracking-wide animate-text-pulse">
             MEET THE TEAM
           </h1>
-          <div className="w-24 h-1 bg-red-500 mx-auto animate-expand-line-fast"></div>
+          <div className="w-24 h-1 bg-primary mx-auto animate-expand-line-fast"></div>
         </div>
         <TeamSection title="KEY PERSON" members={keyPersons} />
         <TeamSection title="STAFF CO-ORDINATOR" members={staffCoordinators} /> 

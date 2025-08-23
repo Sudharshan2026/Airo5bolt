@@ -35,9 +35,9 @@ const MapLocation: React.FC = () => {
     <section 
       ref={containerRef}
       id="location" 
-      className="w-full py-24 bg-black overflow-hidden"
+      className="w-full py-24 bg-background overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-8 text-white">
+      <div className="max-w-7xl mx-auto px-6 md:px-8 text-foreground">
         <div className="text-center mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -52,7 +52,7 @@ const MapLocation: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="max-w-2xl mx-auto text-lg text-gray-300"
+            className="max-w-2xl mx-auto text-lg text-muted-foreground"
           >
             Visit us at <span className="font-medium">Sri Sairam Engineering College</span>, 
             the venue for <span className="font-medium">AIRO 5.O</span>. 
@@ -67,18 +67,18 @@ const MapLocation: React.FC = () => {
           className="relative rounded-2xl overflow-hidden shadow-2xl"
         >
           {!isMapLoaded && (
-            <div className="absolute inset-0 flex items-center justify-center bg-black z-10">
+            <div className="absolute inset-0 flex items-center justify-center bg-background z-10">
               <div className="flex flex-col items-center">
-                <div className="w-16 h-16 border-4 border-white/20 border-t-white rounded-full animate-spin mb-4"></div>
-                <p className="text-gray-300">Loading map...</p>
+                <div className="w-16 h-16 border-4 border-border border-t-foreground rounded-full animate-spin mb-4"></div>
+                <p className="text-muted-foreground">Loading map...</p>
               </div>
             </div>
           )}
           
           <div className="relative lg:flex items-stretch overflow-hidden">
-            <div className="lg:w-1/3 bg-black p-8 lg:p-10 z-10 text-white">
+            <div className="lg:w-1/3 bg-background p-8 lg:p-10 z-10 text-foreground">
               <h3 className="text-xl font-medium mb-2">Address</h3>
-              <p className="text-gray-400">
+              <p className="text-muted-foreground">
                 Sri Sairam Engineering College<br />
                 West Tambaram, Chennai - 600044<br />
                 Tamil Nadu, India
@@ -89,7 +89,7 @@ const MapLocation: React.FC = () => {
                   href="https://maps.google.com/?q=Sri+Sairam+Engineering+College+Chennai"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center w-full py-3 px-4 rounded-lg bg-white text-black font-medium transition-all hover:bg-gray-300"
+                  className="inline-flex items-center justify-center w-full py-3 px-4 rounded-lg bg-foreground text-background font-medium transition-all hover:bg-muted"
                 >
                   Get Directions
                 </a>

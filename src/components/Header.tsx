@@ -8,7 +8,7 @@ const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="bg-black/80 backdrop-blur-sm sticky top-0 z-50 border-b border-red-900/30">
+    <header className="bg-background/80 backdrop-blur-sm sticky top-0 z-50 border-b border-border">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
       <div className="flex items-center gap-4">
         {/* College logo placeholder */}
@@ -17,7 +17,7 @@ const Header: React.FC = () => {
         </div>
         <h1 className="text-xl md:text-2xl font-bold">
            <GradientText 
-              colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#4079ff", "#40ffaa"]}
+              colors={["var(--primary)", "var(--secondary)", "var(--primary)"]}
               animationSpeed={4} 
               showBorder={false} 
               className="font-avartar"
@@ -35,7 +35,7 @@ const Header: React.FC = () => {
 
         {/* Mobile menu button */}
         <button
-          className="md:hidden text-gray-300 hover:text-white"
+          className="md:hidden text-muted-foreground hover:text-foreground"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -44,7 +44,7 @@ const Header: React.FC = () => {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="md:hidden bg-black/95 border-b border-red-900/30">
+        <div className="md:hidden bg-background/95 border-b border-border">
           <nav className="container mx-auto px-4 py-4 flex flex-col gap-4">
             <NavLinks mobile setIsMenuOpen={setIsMenuOpen} />
           </nav>
@@ -75,14 +75,14 @@ const NavLinks: React.FC<NavLinksProps> = ({ mobile = false, setIsMenuOpen }) =>
           key={link.name}
           href={link.href}
           className={`${mobile
-            ? 'block py-2 px-4 hover:bg-red-900/20 rounded transition-colors'
-            : 'text-gray-300 hover:text-white transition-colors relative group'
+            ? 'block py-2 px-4 hover:bg-primary/20 rounded transition-colors'
+            : 'text-muted-foreground hover:text-foreground transition-colors relative group'
             }`}
           onClick={() => mobile && setIsMenuOpen && setIsMenuOpen(false)} 
         >
           {link.name}
           {!mobile && (
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 group-hover:w-full transition-all duration-300"></span>
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
           )}
         </a>
       ))}

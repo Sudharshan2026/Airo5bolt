@@ -26,12 +26,12 @@ const Description = () => {
   ];
 
   return (
-    <section id="event" className="py-16 bg-gray-950">
+    <section id="event" className="py-16 bg-background">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
             <h2 className="text-[3.5rem] md:text-[5rem] font-bold mb-2 text-center font-avartar tracking-wider">
             <GradientText 
-            colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#4079ff", "#40ffaa"]}
+            colors={["var(--primary)", "var(--secondary)", "var(--primary)"]}
             animationSpeed={4} 
             showBorder={false} 
             className="font-avartar"
@@ -41,8 +41,8 @@ const Description = () => {
             </GradientText>
           </h2>
 
-          <div className="bg-black/20 backdrop-blur-sm border border-[#4079ff]/20 rounded-xl p-6 md:p-8 shadow-xl shadow-[#4079ff]/10 mb-12">
-            <p className="text-gray-300 mb-6 leading-relaxed">
+          <div className="bg-muted/20 backdrop-blur-sm border border-primary/20 rounded-xl p-6 md:p-8 shadow-xl shadow-primary/10 mb-12">
+            <p className="text-muted-foreground mb-6 leading-relaxed">
             AIRO 5.0 - The Power of Ideas, The Spirit
 of Innovation!
 AIRO 5.0 marks the 5th edition of the
@@ -55,7 +55,7 @@ country to showcase their skills and
 imagination
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-gray-300">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-muted-foreground">
               <EventDetail icon={Calendar} label="Date" value="Sep 12, 2025" />
               <EventDetail icon={Clock} label="Duration" value="24 Hours" />
               <EventDetail icon={MapPin} label="Location" value="Sri Sairam Engineering College" />
@@ -79,11 +79,11 @@ type FeatureCardProps = {
 };
 
 const FeatureCard = ({ title, description }: FeatureCardProps) => (
-  <div className="bg-black/20 backdrop-blur-sm border border-[#4079ff]/10 rounded-lg p-6 hover:border-[#4079ff]/30 transition-all duration-300 hover:shadow-lg hover:shadow-[#4079ff]/10 group">
-    <h3 className="text-xl font-semibold mb-3 text-white group-hover:text-[#4079ff] transition-colors">
+  <div className="bg-muted/20 backdrop-blur-sm border border-primary/10 rounded-lg p-6 hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 group">
+    <h3 className="text-xl font-semibold mb-3 text-foreground group-hover:text-primary transition-colors">
       {title}
     </h3>
-    <p className="text-gray-400">{description}</p>
+    <p className="text-muted-foreground">{description}</p>
   </div>
 );
 
@@ -95,9 +95,9 @@ type EventDetailProps = {
 
 const EventDetail = ({ icon: Icon, label, value }: EventDetailProps) => (
   <div className="flex items-center gap-3">
-    <Icon className="text-[#4079ff]" size={24} />
+    <Icon className="text-primary" size={24} />
     <div>
-      <p className="text-sm text-gray-400">{label}</p>
+      <p className="text-sm text-muted-foreground">{label}</p>
       <p className="font-medium">{value}</p>
     </div>
   </div>

@@ -44,6 +44,8 @@ export default {
             4: 'var(--chart-4)',
             5: 'var(--chart-5)',
         },
+        gray: 'var(--color-gray)',
+        lightgray: 'var(--color-lightgray)',
       },
       fontFamily: {
         sans: ['"General Sans"', 'sans-serif'],

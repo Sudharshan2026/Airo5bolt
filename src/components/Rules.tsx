@@ -3,7 +3,7 @@ import { FaFire, FaShieldAlt, FaDragon, FaExclamationTriangle } from "react-icon
 const rules = [
   {
     category: "General Rules",
-    icon: <FaShieldAlt className="text-yellow-500 text-3xl" />,
+    icon: <FaShieldAlt className="text-secondary text-3xl" />,
     details: [
       "Each team must consist of a minimum of 2 members and a maximum of 4 members.",
       "Teams are allowed to select and work on only one problem statement.",
@@ -30,7 +30,7 @@ const rules = [
   },
   {
     category: "AIRO 5.O Rules",
-    icon: <FaDragon className="text-red-500 text-3xl" />,
+    icon: <FaDragon className="text-primary text-3xl" />,
     details: [
       "Teams must upload the problem statement PPT and obtain approval during registration.",
       "Any form of plagiarism will lead to immediate disqualification.",
@@ -48,7 +48,7 @@ const rules = [
   },
   {
     category: "Compliance and Enforcement",
-    icon: <FaExclamationTriangle className="text-orange-500 text-3xl" />,
+    icon: <FaExclamationTriangle className="text-primary text-3xl" />,
     details: [
       "Failure to adhere to the above rules may result in warnings, penalties, or disqualification.",
       "The organizing committee reserves the right to modify the rules if necessary, with prior notification to the participants.",
@@ -59,15 +59,15 @@ const rules = [
 
 const Guidelines = () => {
   return (
-    <div className="w-full bg-gray-950 py-12 px-6 md:px-16">
+    <div className="w-full bg-background py-12 px-6 md:px-16">
       {/* Title Section */}
       <div className="text-center mb-10">
-        <h2 className="text-4xl font-bold text-white">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-blue-600">
+        <h2 className="text-4xl font-bold text-foreground">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
             HackTronix Guidelines
           </span>
         </h2>
-        <p className="text-gray-300 mt-3 text-lg">
+        <p className="text-muted-foreground mt-3 text-lg">
           Follow these rules to ensure fair play and an amazing experience.
         </p>
       </div>
@@ -77,19 +77,19 @@ const Guidelines = () => {
         {rules.map((rule, index) => (
           <div
             key={index}
-            className="bg-gray-900 p-6 rounded-xl shadow-xl transition-transform transform hover:scale-105"
+            className="bg-muted p-6 rounded-xl shadow-xl transition-transform transform hover:scale-105"
           >
             {/* Rule Category */}
             <div className="flex items-center space-x-4">
               {rule.icon}
-              <h3 className="text-2xl font-semibold text-white">{rule.category}</h3>
+              <h3 className="text-2xl font-semibold text-foreground">{rule.category}</h3>
             </div>
 
             {/* Rule List */}
-            <ul className="mt-4 space-y-2 text-gray-300">
+            <ul className="mt-4 space-y-2 text-muted-foreground">
               {rule.details.map((detail, idx) => (
                 <li key={idx} className="flex items-start">
-                  <FaFire className="text-red-500 mr-2 mt-1" />
+                  <FaFire className="text-primary mr-2 mt-1" />
                   {detail}
                 </li>
               ))}

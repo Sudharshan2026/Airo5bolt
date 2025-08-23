@@ -33,7 +33,7 @@ const CountdownBlock: React.FC<CountdownBlockProps> = ({ value, label }) => (
         {value}
       </span>
     </span>
-    <span className="text-xs sm:text-sm text-gray-400">{label}</span>
+    <span className="text-xs sm:text-sm text-muted-foreground">{label}</span>
   </div>
 );
 
@@ -251,7 +251,7 @@ const HeroSection = () => {
             transition={{ duration: 3, repeat: Infinity }}
           >
             <GradientText 
-              colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#4079ff", "#40ffaa"]}
+              colors={["var(--primary)", "var(--secondary)", "var(--primary)"]}
               animationSpeed={4} 
               showBorder={false} 
               className="font-avartar"
@@ -265,7 +265,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 1, duration: 0.8 }}
-            className="text-2xl md:text-3xl text-[#40ffaa] mb-2"
+            className="text-2xl md:text-3xl text-primary mb-2"
           >
             2025
           </motion.div>
@@ -308,14 +308,14 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.8 + index * 0.1, duration: 0.8 }}
-              className="relative bg-black/60 backdrop-blur-md border border-[#4079ff]/30 rounded-lg p-6 hover:border-[#40ffaa]/50 hover:shadow-[0_0_20px_rgba(64,255,170,0.3)] transition-all duration-500 group overflow-hidden"
+              className="relative bg-background/60 backdrop-blur-md border border-primary/30 rounded-lg p-6 hover:border-secondary/50 hover:shadow-[0_0_20px_rgba(var(--secondary),0.3)] transition-all duration-500 group overflow-hidden"
             >
               {/* Animated background glow */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#4079ff]/5 via-transparent to-[#40ffaa]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
               {/* Animated border effect */}
               <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-[#4079ff]/20 via-[#40ffaa]/20 to-[#4079ff]/20 animate-pulse" />
+                <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 animate-pulse" />
               </div>
               
               <div className="relative z-10">
@@ -324,12 +324,12 @@ const HeroSection = () => {
                   transition={{ duration: 0.3 }}
                 >
                   <detail.icon 
-                    className="text-[#40ffaa] mx-auto mb-3 drop-shadow-[0_0_10px_rgba(64,255,170,0.5)]" 
+                    className="text-secondary mx-auto mb-3 drop-shadow-[0_0_10px_rgba(var(--secondary),0.5)]"
                     size={28} 
                   />
                 </motion.div>
-                <p className="text-sm text-gray-300 mb-1 font-medium">{detail.label}</p>
-                <p className="font-bold text-white text-lg tracking-wide">{detail.value}</p>
+                <p className="text-sm text-muted-foreground mb-1 font-medium">{detail.label}</p>
+                <p className="font-bold text-foreground text-lg tracking-wide">{detail.value}</p>
               </div>
             </motion.div>
           ))}
@@ -344,13 +344,13 @@ const HeroSection = () => {
         >
           <button
             onClick={scrollToEvents}
-            className="bg-gradient-to-r from-[#4079ff] to-[#40ffaa] hover:scale-105 transform transition-all duration-300 text-lg px-8 py-6 shadow-[0_0_20px_#4079ff] animate-pulse"
+            className="bg-gradient-to-r from-primary to-secondary hover:scale-105 transform transition-all duration-300 text-lg px-8 py-6 shadow-[0_0_20px_var(--primary)] animate-pulse"
           >
             Explore Events
           </button>
           <button
             onClick={scrollToEvents}
-            className="border-[#4079ff] text-[#4079ff] hover:bg-[#4079ff]/10 hover:scale-105 transform transition-all duration-300 text-lg px-8 py-6"
+            className="border-primary text-primary hover:bg-primary/10 hover:scale-105 transform transition-all duration-300 text-lg px-8 py-6"
           >
             Learn More
           </button>

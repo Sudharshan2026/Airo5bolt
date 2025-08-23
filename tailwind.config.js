@@ -46,7 +46,9 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['"General Sans"', 'sans-serif'],
+        heading: ['Bulevar', 'sans-serif'],
+        decorative: ['Migra', 'serif'],
         avartar: ['AvartarWater', 'cursive'],
       },
       animation: {

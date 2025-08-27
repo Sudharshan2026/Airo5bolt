@@ -22,7 +22,7 @@ const Team1HackathonPage = () => {
   };
 
   // Function to generate avatar with initials
-  const generateAvatar = (name: string, size: number = 32) => {
+  const generateAvatar = (name: string, size: number = 32, extraClasses: string = '') => {
     const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
     const colors = [
       'from-purple-500 to-pink-500',
@@ -36,7 +36,7 @@ const Team1HackathonPage = () => {
     
     return (
       <div 
-        className={`w-${size === 32 ? '8' : size === 40 ? '10' : '12'} h-${size === 32 ? '8' : size === 40 ? '10' : '12'} rounded-full bg-gradient-to-br ${colors[colorIndex]} flex items-center justify-center text-white font-semibold text-sm`}
+        className={`w-${size === 32 ? '8' : size === 40 ? '10' : '12'} h-${size === 32 ? '8' : size === 40 ? '10' : '12'} rounded-full bg-gradient-to-br ${colors[colorIndex]} flex items-center justify-center text-white font-semibold text-sm ${extraClasses}`}
       >
         {initials}
       </div>
@@ -75,13 +75,9 @@ const Team1HackathonPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white relative">
+    <div className="min-h-screen bg-gray-900 text-white relative team1-page">
       {/* Matrix Background Video Effect */}
-      <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-red-900/20 via-gray-900 to-black"></div>
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxwYXR0ZXJuIGlkPSJncmlkIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPgogICAgICA8cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDMzNTI5IiBzdHJva2Utd2lkdGg9IjEiLz4KICAgIDwvcGF0dGVybj4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIgLz4KPC9zdmc+')] opacity-10"></div>
-        <div className="absolute inset-0 bg-red-600/10 mix-blend-multiply"></div>
-      </div>
+      <div className="fixed inset-0 z-0 hackathon-matrix-bg" />
 
       {/* Navigation */}
       <nav className="relative z-50 flex items-center justify-between p-4 backdrop-blur-sm bg-gray-900/80 border-b border-gray-800">
@@ -127,15 +123,17 @@ const Team1HackathonPage = () => {
           {/* Left Column - Cover Image */}
           <div className="lg:col-span-1">
             <div className="relative">
-              <div className="aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-red-600 to-orange-600 p-8 flex items-center justify-center">
-                <div className="text-center text-white">
-                  <h1 className="text-4xl font-bold mb-4">Team1</h1>
-                  <p className="text-xl mb-2">Hackathon</p>
-                  <p className="text-lg">Chennai</p>
-                  <div className="mt-6 bg-black/20 rounded-lg p-4">
-                    <p className="text-sm">Aug 9-10, 2025</p>
-                  </div>
-                </div>
+              <img
+                src="https://images.lumacdn.com/event-covers/d8/fc5b2e07-85be-478e-a5a5-a2326f2c74b2.png"
+                alt=""
+                className="absolute top-4 left-0 w-full h-full object-cover rounded-2xl blur-2xl opacity-50"
+              />
+              <div className="relative aspect-square rounded-2xl overflow-hidden">
+                <img
+                  src="https://images.lumacdn.com/event-covers/d8/fc5b2e07-85be-478e-a5a5-a2326f2c74b2.png"
+                  alt="Team1 Hackathon Chennai"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
 
@@ -143,10 +141,10 @@ const Team1HackathonPage = () => {
             <div className="hidden lg:block space-y-6 mt-8">
               
               {/* Presented By Card */}
-              <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700">
+              <div className="glass-card rounded-xl p-6">
                 <div className="flex items-center space-x-3 mb-4">
                   <img 
-                    src="/api/placeholder/40/40" 
+                    src="https://images.lumacdn.com/calendars/aa/00caad68-0837-4392-8511-dbbcefbc463b"
                     alt="Avalanche Team1 India" 
                     className="w-10 h-10 rounded-lg"
                   />
@@ -166,16 +164,12 @@ const Team1HackathonPage = () => {
               </div>
 
               {/* Hosted By Card */}
-              <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700">
+              <div className="glass-card rounded-xl p-6">
                 <h3 className="text-sm font-medium text-gray-400 mb-4">Hosted By</h3>
                 <div className="space-y-3">
                   {hosts.map((host, index) => (
                     <div key={index} className="flex items-center space-x-3">
-                      <img 
-                        src={host.avatar} 
-                        alt={host.name} 
-                        className="w-8 h-8 rounded-full"
-                      />
+                      {generateAvatar(host.name)}
                       <div className="flex-1 min-w-0">
                         <p className="font-medium text-white truncate">{host.name}</p>
                       </div>
@@ -195,7 +189,7 @@ const Team1HackathonPage = () => {
               </div>
 
               {/* Attendees Card */}
-              <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700">
+              <div className="glass-card rounded-xl p-6">
                 <h3 className="text-sm font-medium text-gray-400 mb-4">142 Went</h3>
                 <button 
                   onClick={() => setShowGuestList(true)}
@@ -204,12 +198,9 @@ const Team1HackathonPage = () => {
                   <div className="flex items-center space-x-2 mb-3">
                     <div className="flex -space-x-2">
                       {featuredGuests.slice(0, 6).map((guest, index) => (
-                        <img
-                          key={index}
-                          src={guest.avatar}
-                          alt={guest.name}
-                          className="w-8 h-8 rounded-full border-2 border-gray-800"
-                        />
+                        <div key={index}>
+                          {generateAvatar(guest.name, 32, "border-2 border-gray-800")}
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -246,7 +237,7 @@ const Team1HackathonPage = () => {
             <div className="mb-8">
               <div className="flex items-center space-x-2 mb-4">
                 <img 
-                  src="/api/placeholder/24/24" 
+                  src="https://images.lumacdn.com/calendars/aa/00caad68-0837-4392-8511-dbbcefbc463b"
                   alt="Avalanche Team1 India" 
                   className="w-6 h-6 rounded"
                 />
@@ -254,7 +245,7 @@ const Team1HackathonPage = () => {
                 <ChevronRight size={16} className="text-gray-400" />
               </div>
               
-              <h1 className="text-4xl font-bold text-white mb-6">Team1 Hackathon: Chennai</h1>
+              <h1 className="text-5xl font-bold text-white mb-6">Team1 Hackathon: Chennai</h1>
               
               {/* Event Meta Info */}
               <div className="space-y-4">
@@ -284,7 +275,7 @@ const Team1HackathonPage = () => {
             </div>
 
             {/* Registration Status */}
-            <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700 mb-8">
+            <div className="glass-card rounded-xl p-6 mb-8">
               <div className="flex items-center space-x-3 mb-4">
                 <div className="flex items-center justify-center w-8 h-8 bg-gray-700 rounded-full">
                   <X size={16} className="text-gray-400" />
@@ -297,7 +288,7 @@ const Team1HackathonPage = () => {
             </div>
 
             {/* About Event */}
-            <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700 mb-8">
+            <div className="glass-card rounded-xl p-6 mb-8">
               <h2 className="text-sm font-medium text-gray-400 mb-6 border-b border-gray-700 pb-2">About Event</h2>
               
               <div className="prose prose-invert max-w-none">
@@ -416,7 +407,7 @@ const Team1HackathonPage = () => {
             </div>
 
             {/* Location */}
-            <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700 mb-8">
+            <div className="glass-card rounded-xl p-6 mb-8">
               <h2 className="text-sm font-medium text-gray-400 mb-6 border-b border-gray-700 pb-2">Location</h2>
               
               <div className="mb-4">
@@ -433,7 +424,7 @@ const Team1HackathonPage = () => {
             <div className="lg:hidden space-y-6">
               
               {/* Presented By Card */}
-              <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700">
+              <div className="glass-card rounded-xl p-6">
                 <div className="flex items-center space-x-3 mb-4">
                   <img 
                     src="/api/placeholder/40/40" 
@@ -456,16 +447,12 @@ const Team1HackathonPage = () => {
               </div>
 
               {/* Hosted By Card */}
-              <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700">
+              <div className="glass-card rounded-xl p-6">
                 <h3 className="text-sm font-medium text-gray-400 mb-4">Hosted By</h3>
                 <div className="space-y-3">
                   {hosts.map((host, index) => (
                     <div key={index} className="flex items-center space-x-3">
-                      <img 
-                        src={host.avatar} 
-                        alt={host.name} 
-                        className="w-8 h-8 rounded-full"
-                      />
+                      {generateAvatar(host.name)}
                       <div className="flex-1 min-w-0">
                         <p className="font-medium text-white truncate">{host.name}</p>
                       </div>
@@ -485,7 +472,7 @@ const Team1HackathonPage = () => {
               </div>
 
               {/* Attendees Card */}
-              <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700">
+              <div className="glass-card rounded-xl p-6">
                 <h3 className="text-sm font-medium text-gray-400 mb-4">142 Went</h3>
                 <button 
                   onClick={() => setShowGuestList(true)}
@@ -494,12 +481,9 @@ const Team1HackathonPage = () => {
                   <div className="flex items-center space-x-2 mb-3">
                     <div className="flex -space-x-2">
                       {featuredGuests.slice(0, 6).map((guest, index) => (
-                        <img
-                          key={index}
-                          src={guest.avatar}
-                          alt={guest.name}
-                          className="w-8 h-8 rounded-full border-2 border-gray-800"
-                        />
+                        <div key={index}>
+                          {generateAvatar(guest.name, 32, "border-2 border-gray-800")}
+                        </div>
                       ))}
                     </div>
                   </div>

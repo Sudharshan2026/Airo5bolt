@@ -13,6 +13,7 @@ import Events from "./components/Events";
 import FAQ from "./components/FAQ";
 import { FloatingNav } from "./components/FloatingNav";
 import Team1HackathonPage from "./components/Team1HackathonPage";
+import AiroHackathonPage from "./components/AiroHackathonPage";
 
 function ScrollToHashElement() {
   const location = useLocation();
@@ -98,6 +99,7 @@ function App() {
             <Route path="/guidelines" element={<div><Rules /> <Footer /> </div>} />
             <Route path="/results" element={<div><Results /> <Footer /></div>} />
             <Route path="/team1-hackathon-chennai" element={<Team1HackathonPage />} />
+            <Route path="/airo-hackathon" element={<AiroHackathonPage />} />
           </Routes>
         </main>
       </div>

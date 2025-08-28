@@ -1,19 +1,20 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import Footer from "./components/Footer";
 import PrimaryHero from "./components/PrimaryHero";
-import ScrollWrapper from "./components/ScrollWrapper";
-import Rules from "./components/Rules";
-import OrganizersPage from "./components/OrganizersPage";
 import CollegeMap from "./components/CollegeMap";
 import WhyJoinUs from "./components/WhyJoinUs";
-import Results from "./components/Results";
 import Preloader from "./components/Preloader";
 import Events from "./components/Events";
 import FAQ from "./components/FAQ";
 import { FloatingNav } from "./components/FloatingNav";
-import Team1HackathonPage from "./components/Team1HackathonPage";
-import AiroHackathonPage from "./components/AiroHackathonPage";
+
+// Lazy load the page components
+const Rules = lazy(() => import("./components/Rules"));
+const OrganizersPage = lazy(() => import("./components/OrganizersPage"));
+const Results = lazy(() => import("./components/Results"));
+const Team1HackathonPage = lazy(() => import("./components/Team1HackathonPage"));
+const AiroHackathonPage = lazy(() => import("./components/AiroHackathonPage"));
 
 function ScrollToHashElement() {
   const location = useLocation();
@@ -72,35 +73,37 @@ function App() {
       <div className="flex flex-col min-h-screen">
         <FloatingNav />
         <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={
-              <ScrollWrapper>
-                <PrimaryHero />
-                <div data-scroll-section>
-                </div>
-                <div data-scroll-section>
-                  <Events />
-                </div>
-                <div data-scroll-section>
-                  <WhyJoinUs />
-                </div>
-                <div data-scroll-section>
-                  <CollegeMap />
-                </div>
-                <div data-scroll-section>
-                  <FAQ />
-                </div>
-                <div data-scroll-section>
-                  <Footer />
-                </div>
-              </ScrollWrapper>
-            } />
-            <Route path="/team" element={<div><OrganizersPage /> <Footer /> </div>} />
-            <Route path="/guidelines" element={<div><Rules /> <Footer /> </div>} />
-            <Route path="/results" element={<div><Results /> <Footer /></div>} />
-            <Route path="/team1-hackathon-chennai" element={<Team1HackathonPage />} />
-            <Route path="/airo-hackathon" element={<AiroHackathonPage />} />
-          </Routes>
+          <Suspense fallback={<div className="w-full h-full flex items-center justify-center">Loading...</div>}>
+            <Routes>
+              <Route path="/" element={
+                <>
+                  <PrimaryHero />
+                  <div>
+                  </div>
+                  <div>
+                    <Events />
+                  </div>
+                  <div>
+                    <WhyJoinUs />
+                  </div>
+                  <div>
+                    <CollegeMap />
+                  </div>
+                  <div>
+                    <FAQ />
+                  </div>
+                  <div>
+                    <Footer />
+                  </div>
+                </>
+              } />
+              <Route path="/team" element={<div><OrganizersPage /> <Footer /> </div>} />
+              <Route path="/guidelines" element={<div><Rules /> <Footer /> </div>} />
+              <Route path="/results" element={<div><Results /> <Footer /></div>} />
+              <Route path="/team1-hackathon-chennai" element={<Team1HackathonPage />} />
+              <Route path="/airo-hackathon" element={<AiroHackathonPage />} />
+            </Routes>
+          </Suspense>
         </main>
       </div>
     </Router>

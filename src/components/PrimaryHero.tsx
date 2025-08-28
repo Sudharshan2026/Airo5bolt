@@ -1,68 +1,22 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './PrimaryHero.scoped.css';
+import heroImage from './assets/miles-morales-spider-man-into-the-spider-verse-black-3840x2160-2201.jpg';
+
 const PrimaryHero: React.FC = () => {
-  useEffect(() => {
-    // Load the original styleguide CSS that includes all fonts and styles
-    // but scope it to this component only
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = '/styleguide-v1.2.css';
-    link.id = 'primary-hero-styleguide';
-    document.head.appendChild(link);
-
-    // Cleanup function to remove the CSS when component unmounts
-    return () => {
-      const existingLink = document.getElementById('primary-hero-styleguide');
-      if (existingLink) {
-        existingLink.remove();
-      }
-    };
-  }, []);
-
   return (
     <div className="primaryHeroWrapper">
-      <header className="section default-header full-height all-devices home-header" data-theme-section="dark" data-scroll-section data-vimeo-status-both-loaded="false">
-        <div className="single-vimeo-background" id="vimeo-background-index-custom-1" data-scroll data-scroll-speed="-4" data-scroll-position="top" data-vimeo-background-target data-vimeo-status-sync="false" data-vimeo-status-activated="false" data-vimeo-status-loaded="false" data-vimeo-status-muted="true" style={{ }}>
-          <iframe src="https://player.vimeo.com/video/1112695340?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1" width="640" height="360" frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
-          <picture className="overlay vimeo-overlay-placeholder placeholder-desktop">
-            <source type="image/webp" data-srcset="https://aanstekelijk.nl/media/pages/home/4926f33bdb-1677769965/header-video-00-00-00-00-still001-400x-q72.webp 400w, https://aanstekelijk.nl/media/pages/home/4926f33bdb-1677769965/header-video-00-00-00-00-still001-540x-q72.webp 540w, https://aanstekelijk.nl/media/pages/home/4926f33bdb-1677769965/header-video-00-00-00-00-still001-720x-q72.webp 720w, https://aanstekelijk.nl/media/pages/home/4926f33bdb-1677769965/header-video-00-00-00-00-still001-1080x-q72.webp 1080w, https://aanstekelijk.nl/media/pages/home/4926f33bdb-1677769965/header-video-00-00-00-00-still001-1440x-q72.webp 1440w, https://aanstekelijk.nl/media/pages/home/4926f33bdb-1677769965/header-video-00-00-00-00-still001-1920x-q72.webp 1920w"/>
-            <img alt="" className="lazy" src="https://aanstekelijk.nl/media/pages/home/4926f33bdb-1677769965/header-video-00-00-00-00-still001-192x-q72.jpg" data-src="https://aanstekelijk.nl/media/pages/home/4926f33bdb-1677769965/header-video-00-00-00-00-still001-1920x-q72.jpg" data-srcset="https://aanstekelijk.nl/media/pages/home/4926f33bdb-1677769965/header-video-00-00-00-00-still001-400x-q72.jpg 400w, https://aanstekelijk.nl/media/pages/home/4926f33bdb-1677769965/header-video-00-00-00-00-still001-540x-q72.jpg 540w, https://aanstekelijk.nl/media/pages/home/4926f33bdb-1677769965/header-video-00-00-00-00-still001-720x-q72.jpg 720w, https://aanstekelijk.nl/media/pages/home/4926f33bdb-1677769965/header-video-00-00-00-00-still001-1080x-q72.jpg 1080w, https://aanstekelijk.nl/media/pages/home/4926f33bdb-1677769965/header-video-00-00-00-00-still001-1440x-q72.jpg 1440w, https://aanstekelijk.nl/media/pages/home/4926f33bdb-1677769965/header-video-00-00-00-00-still001-1920x-q72.jpg 1920w" width="1920" height="1080"/>
-          </picture>
-          <div className="overlay vimeo-overlay-placeholder placeholder-mobile video-box">
-            <video src="https://aanstekelijk.nl/media/pages/home/807eb94734-1677769967/header-video-mobile-v9.mp4" autoPlay loop muted playsInline></video>
-          </div>
-        </div>
+      <header
+        className="section default-header full-height all-devices home-header"
+        data-theme-section="dark"
+        data-scroll-section
+        style={{ backgroundImage: `url(${heroImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+      >
         <div className="overlay overlay-dark"></div>
         <div className="container">
           <div className="row">
             <div className="col">
               <h1 className="split-chars animate-h1 desktop">AIRO 5.O</h1>
               <h1 className="split-chars animate-h1 mobile">AIRO 5.O</h1>
-            </div>
-          </div>
-        </div>
-        <div className="shape-polygon">
-          <div className="shape-polygon-inner">
-            <div className="single-vimeo-background" id="vimeo-background-index-custom-2" data-scroll data-scroll-speed="-4" data-scroll-position="top" data-vimeo-background-target data-vimeo-status-sync="false" data-vimeo-status-activated="false" data-vimeo-status-loaded="false" data-vimeo-status-muted="true" style={{ }}>
-              <iframe src="https://player.vimeo.com/video/1112695340?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1" width="640" height="360" frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
-              <picture className="overlay vimeo-overlay-placeholder placeholder-desktop">
-                <source type="image/webp" data-srcset="https://aanstekelijk.nl/media/pages/home/4926f33bdb-1677769965/header-video-00-00-00-00-still001-400x-q72.webp 400w, https://aanstekelijk.nl/media/pages/home/4926f33bdb-1677769965/header-video-00-00-00-00-still001-540x-q72.webp 540w, https://aanstekelijk.nl/media/pages/home/4926f33bdb-1677769965/header-video-00-00-00-00-still001-720x-q72.webp 720w, https://aanstekelijk.nl/media/pages/home/4926f33bdb-1677769965/header-video-00-00-00-00-still001-1080x-q72.webp 1080w, https://aanstekelijk.nl/media/pages/home/4926f33bdb-1677769965/header-video-00-00-00-00-still001-1440x-q72.webp 1440w, https://aanstekelijk.nl/media/pages/home/4926f33bdb-1677769965/header-video-00-00-00-00-still001-1920x-q72.webp 1920w"/>
-                <img alt="" className="lazy" src="https://aanstekelijk.nl/media/pages/home/4926f33bdb-1677769965/header-video-00-00-00-00-still001-192x-q72.jpg" data-src="https://aanstekelijk.nl/media/pages/home/4926f33bdb-1677769965/header-video-00-00-00-00-still001-1920x-q72.jpg" data-srcset="https://aanstekelijk.nl/media/pages/home/4926f33bdb-1677769965/header-video-00-00-00-00-still001-400x-q72.jpg 400w, https://aanstekelijk.nl/media/pages/home/4926f33bdb-1677769965/header-video-00-00-00-00-still001-540x-q72.jpg 540w, https://aanstekelijk.nl/media/pages/home/4926f33bdb-1677769965/header-video-00-00-00-00-still001-720x-q72.jpg 720w, https://aanstekelijk.nl/media/pages/home/4926f33bdb-1677769965/header-video-00-00-00-00-still001-1080x-q72.jpg 1080w, https://aanstekelijk.nl/media/pages/home/4926f33bdb-1677769965/header-video-00-00-00-00-still001-1440x-q72.jpg 1440w, https://aanstekelijk.nl/media/pages/home/4926f33bdb-1677769965/header-video-00-00-00-00-still001-1920x-q72.jpg 1920w" width="1920" height="1080"/>
-              </picture>
-              <div className="overlay vimeo-overlay-placeholder placeholder-mobile video-box">
-                <video autoPlay muted playsInline loop>
-                  <source src="https://aanstekelijk.nl/media/pages/home/807eb94734-1677769967/header-video-mobile-v9.mp4" type="video/mp4"/>
-                </video>
-              </div>
-            </div>
-            <div className="overlay overlay-dark"></div>
-            <div className="container">
-              <div className="row">
-                <div className="col">
-                  <h1 className="split-chars animate-h1 desktop">AIRO 5.O</h1>
-                  <h1 className="split-chars animate-h1 mobile">AIRO 5.O</h1>
-                </div>
-              </div>
             </div>
           </div>
         </div>

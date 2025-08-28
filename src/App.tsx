@@ -1,19 +1,18 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
-import Footer from "./components/Footer";
+import { useEffect, lazy, Suspense } from "react";
 import PrimaryHero from "./components/PrimaryHero";
-import ScrollWrapper from "./components/ScrollWrapper";
-import Rules from "./components/Rules";
-import OrganizersPage from "./components/OrganizersPage";
-import CollegeMap from "./components/CollegeMap";
-import WhyJoinUs from "./components/WhyJoinUs";
-import Results from "./components/Results";
-import Preloader from "./components/Preloader";
-import Events from "./components/Events";
-import FAQ from "./components/FAQ";
 import { FloatingNav } from "./components/FloatingNav";
-import Team1HackathonPage from "./components/Team1HackathonPage";
-import AiroHackathonPage from "./components/AiroHackathonPage";
+
+const Events = lazy(() => import("./components/Events"));
+const WhyJoinUs = lazy(() => import("./components/WhyJoinUs"));
+const CollegeMap = lazy(() => import("./components/CollegeMap"));
+const FAQ = lazy(() => import("./components/FAQ"));
+const Footer = lazy(() => import("./components/Footer"));
+const OrganizersPage = lazy(() => import("./components/OrganizersPage"));
+const Rules = lazy(() => import("./components/Rules"));
+const Results = lazy(() => import("./components/Results"));
+const Team1HackathonPage = lazy(() => import("./components/Team1HackathonPage"));
+const AiroHackathonPage = lazy(() => import("./components/AiroHackathonPage"));
 
 function ScrollToHashElement() {
   const location = useLocation();
@@ -22,7 +21,6 @@ function ScrollToHashElement() {
     if (location.hash) {
       const elementId = location.hash.replace("#", "");
       
-      // Use setTimeout to ensure the element is rendered
       const scrollToElement = () => {
         const element = document.getElementById(elementId);
         if (element) {
@@ -32,9 +30,7 @@ function ScrollToHashElement() {
         return false;
       };
 
-      // Try immediately
       if (!scrollToElement()) {
-        // If element not found, retry after a short delay
         const timeoutId = setTimeout(() => {
           scrollToElement();
         }, 100);
@@ -47,62 +43,38 @@ function ScrollToHashElement() {
   return null;
 }
 
+const LoadingFallback = () => (
+  <div className="flex justify-center items-center h-screen">
+    <div>Loading...</div>
+  </div>
+);
+
 function App() {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Prevent preloader from showing again
-    if (!sessionStorage.getItem("hasLoaded")) {
-      setTimeout(() => {
-        setLoading(false);
-        sessionStorage.setItem("hasLoaded", "true");
-      }, 3000);
-    } else {
-      setLoading(false);
-    }
-  }, []);
-
-  if (loading) {
-    return <Preloader />;
-  }
-
   return (
     <Router>
       <ScrollToHashElement />
-      <div className="flex flex-col min-h-screen">
-        <FloatingNav />
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={
-              <ScrollWrapper>
-                <PrimaryHero />
-                <div data-scroll-section>
-                </div>
-                <div data-scroll-section>
+      <FloatingNav />
+      <main className="flex-grow">
+        <Suspense fallback={<LoadingFallback />}>
+            <Routes>
+              <Route path="/" element={
+                <>
+                  <PrimaryHero />
                   <Events />
-                </div>
-                <div data-scroll-section>
                   <WhyJoinUs />
-                </div>
-                <div data-scroll-section>
                   <CollegeMap />
-                </div>
-                <div data-scroll-section>
                   <FAQ />
-                </div>
-                <div data-scroll-section>
                   <Footer />
-                </div>
-              </ScrollWrapper>
-            } />
-            <Route path="/team" element={<div><OrganizersPage /> <Footer /> </div>} />
-            <Route path="/guidelines" element={<div><Rules /> <Footer /> </div>} />
-            <Route path="/results" element={<div><Results /> <Footer /></div>} />
-            <Route path="/team1-hackathon-chennai" element={<Team1HackathonPage />} />
-            <Route path="/airo-hackathon" element={<AiroHackathonPage />} />
-          </Routes>
-        </main>
-      </div>
+                </>
+              } />
+              <Route path="/team" element={<div><OrganizersPage /> <Footer /> </div>} />
+              <Route path="/guidelines" element={<div><Rules /> <Footer /> </div>} />
+              <Route path="/results" element={<div><Results /> <Footer /></div>} />
+              <Route path="/team1-hackathon-chennai" element={<Team1HackathonPage />} />
+              <Route path="/airo-hackathon" element={<AiroHackathonPage />} />
+            </Routes>
+        </Suspense>
+      </main>
     </Router>
   );
 }

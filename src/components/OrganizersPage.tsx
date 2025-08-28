@@ -30,6 +30,7 @@ const TeamSection: React.FC<TeamSectionProps> = ({ title, members }) => (
                   src={member.image} 
                   alt={member.name} 
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  loading="lazy"
                 />
                 {member.linkedin && (
                   <a 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { MapPin, ExternalLink, ChevronRight, X } from 'lucide-react';
+import { ExternalLink, ChevronRight, X } from 'lucide-react';
 import './Team1Hackathon.css';
 
 const Team1HackathonPage = () => {
@@ -189,26 +189,7 @@ const Team1HackathonPage = () => {
               </div>
 
               {/* Attendees Card */}
-              <div className="glass-card rounded-xl p-6">
-                <h3 className="text-sm font-medium text-gray-400 mb-4">142 Went</h3>
-                <button 
-                  onClick={() => setShowGuestList(true)}
-                  className="w-full text-left"
-                >
-                  <div className="flex items-center space-x-2 mb-3">
-                    <div className="flex -space-x-2">
-                      {featuredGuests.slice(0, 6).map((guest, index) => (
-                        <div key={index}>
-                          {generateAvatar(guest.name, 32, "border-2 border-gray-800")}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <p className="text-sm text-gray-400">
-                    EMMANUEL RAMAMOORTHY, Vishal Aakash and 140 others
-                  </p>
-                </button>
-              </div>
+              
 
               {/* Action Buttons */}
               <div className="space-y-3">
@@ -259,16 +240,6 @@ const Team1HackathonPage = () => {
                   <div>
                     <p className="font-medium text-white">Saturday, August 9</p>
                     <p className="text-gray-400 text-sm">9:00 AM - Aug 10, 9:00 PM</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center space-x-3">
-                  <div className="flex items-center justify-center w-12 h-12 bg-gray-800 rounded-lg">
-                    <MapPin size={20} className="text-gray-400" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-white">Register to See Address</p>
-                    <p className="text-gray-400 text-sm">Chennai, Tamil Nadu</p>
                   </div>
                 </div>
               </div>

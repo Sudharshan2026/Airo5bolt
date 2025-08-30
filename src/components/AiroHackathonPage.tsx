@@ -1,49 +1,97 @@
-import { useState } from 'react';
-import { MapPin, Clock, Users, Trophy, FileText, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { MapPin, ExternalLink, ChevronRight, X } from 'lucide-react';
 import './AiroHackathon.css';
 
 const AiroHackathonPage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [currentTime, setCurrentTime] = useState(new Date());
+  // const [showGuestList, setShowGuestList] = useState(false);
 
-  const eventHighlights = [
-    { icon: <Clock className="w-5 h-5 mr-3 text-blue-400" />, text: 'Duration: 2 Hours' },
-    { icon: <Users className="w-5 h-5 mr-3 text-blue-400" />, text: 'Team Size: 3 members per team' },
-    { icon: <FileText className="w-5 h-5 mr-3 text-blue-400" />, text: 'Problem Statement: Revealed on the spot' },
-    { icon: <MapPin className="w-5 h-5 mr-3 text-blue-400" />, text: 'Mode: On-campus (bring your laptops)' },
-    { icon: <Trophy className="w-5 h-5 mr-3 text-blue-400" />, text: 'Tools Allowed: Figma, Canva' },
-  ];
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
 
-  const eventFlow = [
-    { time: '11:00 – 11:15', task: 'Problem Release + Research & Wireframing' },
-    { time: '11:15 – 12:15', task: 'UI Design Sprint (with Creative Tasks)' },
-    { time: '12:15 – 12:55', task: 'Team Presentations & Live Judging' },
-    { time: '12:55 – 1:00', task: 'Wrap-up & Scoring' },
-  ];
+  const formatTime = (date: Date) => {
+    return date.toLocaleTimeString('en-IN', {
+      hour: '2-digit',
+      minute: '2-digit',
+      timeZone: 'Asia/Kolkata',
+      hour12: true
+    }) + ' GMT+5:30';
+  };
 
-  const evaluationCriteria = [
-    'Creativity & Innovation',
-    'Usability & User-Centered Design',
-    'Visual Design & Aesthetics',
-    'Presentation & Clarity',
-  ];
+  // Function to generate avatar with initials
+  const generateAvatar = (name: string, size: number = 32, extraClasses: string = '') => {
+    const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+    const colors = [
+      'from-purple-500 to-pink-500',
+      'from-blue-500 to-cyan-500',
+      'from-green-500 to-teal-500',
+      'from-yellow-500 to-orange-500',
+      'from-red-500 to-pink-500',
+      'from-indigo-500 to-purple-500'
+    ];
+    const colorIndex = name.length % colors.length;
+    
+    return (
+      <div 
+        className={`w-${size === 32 ? '8' : size === 40 ? '10' : '12'} h-${size === 32 ? '8' : size === 40 ? '10' : '12'} rounded-full bg-gradient-to-br ${colors[colorIndex]} flex items-center justify-center text-white font-semibold text-sm ${extraClasses}`}
+      >
+        {initials}
+      </div>
+    );
+  };
 
-  const rules = [
-    'Team size: 3 members per team',
-    'Problem statement will be revealed only during the event',
-    'All designs must be original (plagiarism = disqualification)',
-    'Use of pre-built templates must be declared',
+
+
+  // Hosts data
+  const hosts = [
+    {
+      name: "Prasanna Hari Ram S",
+      twitter: "https://www.linkedin.com/in/prasanna-hari-ram-s-824409333?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    },
+    {
+      name: "S K SANJEEVAN",
+      twitter: "https://www.linkedin.com/in/sanjeevansks"
+    },
+    {
+      name: "Berinta R",
+      twitter: "https://www.linkedin.com/in/berinta-r-a2369b296"
+    },
+    {
+      name: "Vijayalakshmi V",
+      twitter: "https://www.linkedin.com/in/vijayalakshmi-v-00461b2b7?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    },
+    {
+      name: "Sree Lekshmi.J.U",
+      twitter: "https://www.linkedin.com/in/sree-lekshmi-j-u-4b3678296"
+    }
   ];
 
   return (
     <div className="min-h-screen bg-gray-900 text-white relative airo-page">
-      <div className="fixed inset-0 z-0 airo-bg" />
+      {/* Matrix Background Video Effect */}
+      <div className="fixed inset-0 z-0 hackathon-matrix-bg" />
 
+      {/* Navigation */}
       <nav className="relative z-50 flex items-center justify-between p-4 backdrop-blur-sm bg-gray-900/80 border-b border-gray-800">
-        <div className="flex items-center space-x-2">
-          <div className="w-5 h-5 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full"></div>
-          <span className="text-xl font-bold">AIRO 5.0</span>
+        <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2">
+            <div className="w-5 h-5 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full"></div>
+            <span className="text-xl font-bold">AIRO</span>
+          </div>
         </div>
-        <button
+        
+        <div className="hidden md:flex items-center space-x-6">
+          <div className="text-sm text-gray-400">{formatTime(currentTime)}</div>
+          <a href="#" className="text-sm hover:text-blue-400 transition-colors">Explore Events</a>
+          <button className="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-sm transition-colors">
+            Register
+          </button>
+        </div>
+
+        <button 
           className="md:hidden"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
@@ -51,71 +99,349 @@ const AiroHackathonPage = () => {
         </button>
       </nav>
 
+      {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden absolute top-16 left-0 right-0 bg-gray-900/95 backdrop-blur-lg border-b border-gray-800 z-40 p-4">
-          {/* Mobile nav content can be added here if needed */}
+          <div className="space-y-4">
+            <a href="#" className="block text-sm hover:text-blue-400 transition-colors">Explore Events</a>
+            <button className="w-full px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-sm transition-colors">
+              Register
+            </button>
+          </div>
         </div>
       )}
 
-      <main className="relative z-10 max-w-7xl mx-auto px-4 py-8">
-        <header className="text-center mb-12">
-          <h1 className="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 mb-2">
-            AIRO 5.0 | UI/UX Mini Hackathon
-          </h1>
-          <p className="text-xl text-gray-300">Design Under Pressure!</p>
-        </header>
-
+      {/* Main Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 py-8">
         <div className="grid lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-1 space-y-8">
-            <div className="glass-card rounded-xl p-6">
-              <h2 className="text-2xl font-bold mb-4 text-blue-400">Event Highlights</h2>
-              <ul className="space-y-3 text-gray-300">
-                {eventHighlights.map((item, index) => (
-                  <li key={index} className="flex items-center">{item.icon}{item.text}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="glass-card rounded-xl p-6">
-              <h2 className="text-2xl font-bold mb-4 text-purple-400">Prize Distribution</h2>
-              <p className="text-gray-300">
-                After lunch, all participants gather at Apple Hall where the
-                winners are announced and prizes are distributed.
-              </p>
+          
+          {/* Left Column - Cover Image */}
+          <div className="lg:col-span-1">
+            {/* <div className="relative">
+              <img
+                src="/events/gwen.jpg"
+                alt=""
+                className="absolute top-4 left-0 w-full h-full object-cover rounded-2xl blur-2xl opacity-50"
+              />
+              <div className="relative aspect-square rounded-2xl overflow-hidden airo-cover-image">
+                <div className="w-full h-full flex items-center justify-center">
+                  <img
+                    src="/events/gwen.jpg"
+                    alt="AIRO 5.0 UI/UX Mini Hackathon"
+                    className="w-3/4 h-3/4 object-contain"
+                  />
+                </div>
+              </div>
+            </div> */}
+
+            {/* Desktop Sidebar Cards */}
+            <div className="hidden lg:block space-y-6 mt-8">
+              
+
+              {/* Event Co-ordinator Card */}
+              <div className="glass-card rounded-xl p-6">
+                <h3 className="text-sm font-medium text-gray-400 mb-4">Event Co-ordinator</h3>
+                <div className="space-y-3">
+                  {hosts.map((host, index) => (
+                    <div key={index} className="flex items-center space-x-3">
+                      {generateAvatar(host.name)}
+                      <div className="flex-1 min-w-0">
+                        <p className="font-medium text-white truncate">{host.name}</p>
+                      </div>
+                      {host.twitter && (
+                        <a 
+                          href={`${host.twitter}`} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-gray-400 hover:text-white transition-colors"
+                        >
+                          <ExternalLink size={16} />
+                        </a>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              
+
+              {/* Action Buttons */}
+              <div className="space-y-3">
+                <button className="w-full px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-sm transition-colors">
+                  Contact the Host
+                </button>
+                <button className="w-full px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-sm transition-colors">
+                  Report Event
+                </button>
+              </div>
+
+              {/* Category Tag */}
+              <div className="flex justify-center">
+                <span className="inline-flex items-center px-3 py-1 bg-purple-600/20 text-purple-400 rounded-full text-sm">
+                  <span className="mr-2">#</span>
+                  UI/UX Design
+                </span>
+              </div>
             </div>
           </div>
 
-          <div className="lg:col-span-2 space-y-8">
-            <div className="glass-card rounded-xl p-6">
-              <h2 className="text-2xl font-bold mb-4 text-blue-400">Event Flow (11:00 AM – 1:00 PM)</h2>
-              <ol className="relative border-l border-gray-700 space-y-6 pl-4">
-                {eventFlow.map((item, index) => (
-                  <li key={index} className="ml-6">
-                    <span className="absolute flex items-center justify-center w-6 h-6 bg-blue-900 rounded-full -left-3 ring-8 ring-gray-900"></span>
-                    <h3 className="font-semibold">{item.time}</h3>
-                    <p className="text-sm text-gray-400">{item.task}</p>
-                  </li>
-                ))}
-              </ol>
+          {/* Right Column - Event Details */}
+          <div className="lg:col-span-2">
+            
+            {/* Event Header */}
+            <div className="mb-8">
+              <div className="flex items-center space-x-2 mb-4">
+                <img 
+                  src="/logo.png"
+                  alt="AIRO 5.0" 
+                  className="w-6 h-6 rounded"
+                />
+                <span className="text-gray-400 text-sm">AIRO 5.0</span>
+                <ChevronRight size={16} className="text-gray-400" />
+              </div>
+              
+              <h1 className="text-5xl font-bold text-white mb-6">AIRO 5.0 | UI/UX Mini Hackathon</h1>
+              
+              {/* Event Meta Info */}
+              <div className="space-y-4">
+                <div className="flex items-center space-x-3">
+                  <div className="flex items-center justify-center w-12 h-12 bg-gray-800 rounded-lg">
+                    <div className="text-center">
+                      <div className="text-xs text-gray-400">Jan</div>
+                      <div className="text-sm font-bold text-white">15</div>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="font-medium text-white">Wednesday, January 15</p>
+                    <p className="text-gray-400 text-sm">11:00 AM - 1:00 PM</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="glass-card rounded-xl p-6">
-              <h2 className="text-2xl font-bold mb-4 text-purple-400">Evaluation Criteria</h2>
-              <ul className="space-y-2 text-gray-300 list-disc list-inside">
-                {evaluationCriteria.map((item, index) => <li key={index}>{item}</li>)}
-              </ul>
+
+            {/* Registration Status */}
+            <div className="glass-card rounded-xl p-6 mb-8">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="flex items-center justify-center w-8 h-8 bg-green-700 rounded-full">
+                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <h2 className="text-xl font-semibold text-white">Registration Open</h2>
+              </div>
+              <p className="text-gray-400 mb-4">
+                Join us for an exciting UI/UX Design competition! Register now to secure your spot.
+              </p>
+              <button className="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 rounded-lg font-semibold transition-all duration-300">
+                Register Now
+              </button>
             </div>
-            <div className="glass-card rounded-xl p-6">
-              <h2 className="text-2xl font-bold mb-4 text-purple-400">Rules</h2>
-              <ul className="space-y-2 text-gray-300 list-disc list-inside">
-                {rules.map((item, index) => <li key={index}>{item}</li>)}
-              </ul>
+
+            {/* About Event */}
+            <div className="glass-card rounded-xl p-6 mb-8">
+              <h2 className="text-sm font-medium text-gray-400 mb-6 border-b border-gray-700 pb-2">About Event</h2>
+              
+              <div className="prose prose-invert max-w-none">
+                <h1 className="text-2xl font-bold text-white mb-4">🎨 AIRO 5.0 | UI/UX Mini Hackathon</h1>
+                
+                <p className="text-gray-300 mb-4">
+                  <strong>Design Under Pressure!</strong>
+                </p>
+                
+                <p className="text-gray-300 mb-6">
+                  Join us for an exciting UI/UX Mini Hackathon as part of AIRO 5.0! This fast-paced 2-hour competition will challenge your creativity, design thinking, and ability to work under pressure. Whether you're a seasoned designer or just starting your journey in UI/UX, this event offers the perfect platform to showcase your skills.
+                </p>
+
+                <hr className="border-gray-700 my-6" />
+
+                <h2 className="text-xl font-bold text-white mb-4">⏰ Event Schedule (11:00 AM – 1:00 PM)</h2>
+                <ul className="text-gray-300 space-y-2 mb-6">
+                  <li><strong>11:00 – 11:15 AM:</strong> Problem Release + Research & Wireframing</li>
+                  <li><strong>11:15 – 12:15 PM:</strong> UI Design Sprint (with Creative Tasks)</li>
+                  <li><strong>12:15 – 12:55 PM:</strong> Team Presentations & Live Judging</li>
+                  <li><strong>12:55 – 1:00 PM:</strong> Wrap-up & Scoring</li>
+                </ul>
+
+                <hr className="border-gray-700 my-6" />
+
+                <h2 className="text-xl font-bold text-white mb-4">📋 Event Highlights</h2>
+                <ul className="text-gray-300 space-y-1 mb-6">
+                  <li>• <strong>Duration:</strong> 2 Hours</li>
+                  <li>• <strong>Team Size:</strong> 3 members per team</li>
+                  <li>• <strong>Problem Statement:</strong> Revealed on the spot</li>
+                  <li>• <strong>Mode:</strong> On-campus (bring your laptops)</li>
+                  <li>• <strong>Tools Allowed:</strong> Figma, Canva</li>
+                </ul>
+
+                <hr className="border-gray-700 my-6" />
+
+                <h2 className="text-xl font-bold text-white mb-4">🏆 Evaluation Criteria</h2>
+                <ul className="text-gray-300 space-y-1 mb-6">
+                  <li>• Creativity & Innovation</li>
+                  <li>• Usability & User-Centered Design</li>
+                  <li>• Visual Design & Aesthetics</li>
+                  <li>• Presentation & Clarity</li>
+                </ul>
+
+                <hr className="border-gray-700 my-6" />
+
+                <h2 className="text-xl font-bold text-white mb-4">📝 Rules & Guidelines</h2>
+                <ul className="text-gray-300 space-y-1 mb-6">
+                  <li>• Team size: 3 members per team</li>
+                  <li>• Problem statement will be revealed only during the event</li>
+                  <li>• All designs must be original (plagiarism = disqualification)</li>
+                  <li>• Use of pre-built templates must be declared</li>
+                  <li>• Teams must present their final design within the time limit</li>
+                </ul>
+
+                <hr className="border-gray-700 my-6" />
+
+                <h2 className="text-xl font-bold text-white mb-4">🎁 Prizes & Recognition</h2>
+                <p className="text-gray-300 mb-4">
+                  After lunch, all participants gather at Apple Hall where the winners are announced and prizes are distributed.
+                </p>
+                <ul className="text-gray-300 space-y-1 mb-6">
+                  <li>• Cash prizes for top 3 teams</li>
+                  <li>• Certificates for all participants</li>
+                  <li>• Special recognition for best presentation</li>
+                  <li>• Networking opportunities with industry professionals</li>
+                </ul>
+
+                <hr className="border-gray-700 my-6" />
+
+                <h2 className="text-xl font-bold text-white mb-4">🏫 About AIRO 5.0</h2>
+                <p className="text-gray-300 mb-6">
+                  <strong>AIRO (Artificial Intelligence & Research Olympiad)</strong> is the flagship technical event of KCG College of Technology. Now in its 5th edition, AIRO brings together students, researchers, and industry professionals to explore the latest innovations in AI, technology, and design. Join us in shaping the future of technology through innovation and collaboration.
+                </p>
+
+                <hr className="border-gray-700 my-6" />
+
+                <h2 className="text-xl font-bold text-white mb-4">📞 Contact Information</h2>
+                <p className="text-gray-300 mb-4">For any queries or support:</p>
+                <ul className="text-gray-300 space-y-1">
+                  <li>📧 Email: <a href="mailto:airo@kcgcollege.com" className="text-blue-400 hover:underline">airo@kcgcollege.com</a></li>
+                  <li>📱 Phone: +91 98765 43210</li>
+                  <li>🌐 Website: <a href="#" className="text-blue-400 hover:underline">www.kcgcollege.com/airo</a></li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Location */}
+            <div className="glass-card rounded-xl p-6 mb-8">
+              <h2 className="text-sm font-medium text-gray-400 mb-6 border-b border-gray-700 pb-2">Location</h2>
+              
+              <div className="mb-4">
+                <p className="text-gray-300 mb-2">KCG College of Technology</p>
+                <p className="text-gray-400 text-sm">Karapakkam, Chennai, Tamil Nadu 600097</p>
+              </div>
+              
+              <div className="rounded-lg overflow-hidden h-48 bg-gray-700 flex items-center justify-center">
+                <div className="text-center">
+                  <MapPin className="w-12 h-12 text-gray-400 mx-auto mb-2" />
+                  <p className="text-gray-400">KCG College of Technology</p>
+                  <p className="text-gray-500 text-sm">Karapakkam, Chennai</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile Sidebar Cards */}
+            <div className="lg:hidden space-y-6">
+              
+              
+              {/* Event Co-ordinator Card */}
+              <div className="glass-card rounded-xl p-6">
+                <h3 className="text-sm font-medium text-gray-400 mb-4">Event Co-ordinator</h3>
+                <div className="space-y-3">
+                  {hosts.map((host, index) => (
+                    <div key={index} className="flex items-center space-x-3">
+                      {generateAvatar(host.name)}
+                      <div className="flex-1 min-w-0">
+                        <p className="font-medium text-white truncate">{host.name}</p>
+                      </div>
+                      {host.twitter && (
+                        <a 
+                          href={`https://twitter.com/${host.twitter}`} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-gray-400 hover:text-white transition-colors"
+                        >
+                          <ExternalLink size={16} />
+                        </a>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Attendees Card */}
+
+              {/* Action Buttons */}
+              <div className="space-y-3">
+                <button className="w-full px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-sm transition-colors">
+                  Contact the Host
+                </button>
+                <button className="w-full px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-sm transition-colors">
+                  Report Event
+                </button>
+              </div>
+
+              {/* Category Tag */}
+              <div className="flex justify-center">
+                <span className="inline-flex items-center px-3 py-1 bg-purple-600/20 text-purple-400 rounded-full text-sm">
+                  <span className="mr-2">#</span>
+                  UI/UX Design
+                </span>
+              </div>
             </div>
           </div>
         </div>
-      </main>
+      </div>
 
-      <footer className="relative z-10 text-center mt-16 text-gray-500 pb-8">
-        <p>Let your designs speak louder than words at AIRO 5.0 – UI/UX Mini Hackathon!</p>
+      {/* Footer */}
+      <footer className="relative z-10 bg-gray-900/50 backdrop-blur-sm border-t border-gray-800 mt-16">
+        <div className="max-w-7xl mx-auto px-4 py-8">
+          <div className="flex flex-col md:flex-row items-center justify-between">
+            <div className="flex items-center space-x-4 mb-4 md:mb-0">
+              <div className="flex items-center space-x-2">
+                <div className="w-5 h-5 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full"></div>
+                <span className="text-xl font-bold">AIRO</span>
+              </div>
+              <div className="hidden md:flex items-center space-x-6 text-sm text-gray-400">
+                <a href="#" className="hover:text-white transition-colors">Events</a>
+                <a href="#" className="hover:text-white transition-colors">About</a>
+                <a href="#" className="hover:text-white transition-colors">Contact</a>
+              </div>
+            </div>
+            
+            <div className="flex items-center space-x-4">
+              <a href="mailto:airo@kcgcollege.com" className="text-gray-400 hover:text-white transition-colors">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                </svg>
+              </a>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987s11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.348-1.051-2.348-2.348s1.051-2.348 2.348-2.348 2.348 1.051 2.348 2.348-1.051 2.348-2.348 2.348zm7.718 0c-1.297 0-2.348-1.051-2.348-2.348s1.051-2.348 2.348-2.348 2.348 1.051 2.348 2.348-1.051 2.348-2.348 2.348z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          
+          <div className="mt-8 pt-8 border-t border-gray-800 text-center">
+            <p className="text-sm text-gray-400">
+              Let your designs speak louder than words at AIRO 5.0 – UI/UX Mini Hackathon!
+            </p>
+          </div>
+        </div>
       </footer>
+
+      {/* Guest List Modal */}
     </div>
   );
 };
